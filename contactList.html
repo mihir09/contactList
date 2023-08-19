@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angular</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="contactList.js"></script>
+    <link rel="stylesheet" href="contactList.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <h1 class="display-3">Contact List</h1>
+    <div ng-app="myApp" ng-controller="contactListController" class="container">
+    <table class="table table-striped table-bordered">
+        <tr>
+            <td>First Name</td>
+            <td><input type="text" ng-model="item.firstName" class="form-control"></td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td><input type="text" ng-model="item.lastName" class="form-control"></td>
+        </tr>
+        <tr>
+            <td>Phone Number</td>
+            <td><input type="number" ng-model="item.phoneNumber" class="form-control"></td>
+        </tr>
+        <tr>
+            <td>Email Id</td>
+            <td><input type="email" ng-model="item.emailId" class="form-control"></td>
+        </tr>
+        <tr>
+            <td class="text-center" colspan="2">
+                <button ng-click="addItem(item)" class="btn btn-primary">Add</button>
+            </td>
+        </tr>
+
+    </table>
+
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone Number</th>
+            <th>Email Id</th>
+            <th>Edit</th>
+            <th>Remove</th>
+        </tr>
+
+        <tr ng-repeat="item in items">
+            <td>
+                <span ng-hide="editMode">{{item.firstName}}</span>
+                <input type="text" ng-show="editMode" ng-model="item.firstName">
+            </td>
+            <td>
+                <span ng-hide="editMode">{{item.lastName}}</span>
+                <input type="text" ng-show="editMode" ng-model="item.lastName">
+            </td>
+            <td>
+                <span ng-hide="editMode">{{item.phoneNumber}}</span>
+                <input type="text" ng-show="editMode" ng-model="item.phoneNumber">
+            </td>
+            <td>
+                <span ng-hide="editMode">{{item.emailId}}</span>
+                <input type="text" ng-show="editMode" ng-model="item.emailId">
+            </td>
+
+            <td class="icons">
+                <i ng-hide="editMode" ng-click="editMode = true; editItem(item)" class="fa-solid fa-pen-to-square"></i>
+                <i class="fa-solid fa-check" ng-show="editMode" ng-click="editMode=false"></i>
+            </td>
+            <td class="icons">
+                <i class="fa-solid fa-trash" ng-click="removeItem($index)"></i>
+            </td>
+        </tr>
+    </table>
+
+    </div>
+</body>
+</html>
